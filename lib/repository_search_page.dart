@@ -129,11 +129,18 @@ class _RepositorySearchPageState extends State<RepositorySearchPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => RepositoryDetailPage(
-                              name: _results[index]["name"],
-                              description: _results[index]["description"] ?? "",
-                              avatarUrl: _results[index]["owner"]["avatar_url"],
-                            ),),
+                            MaterialPageRoute(
+                              builder: (context) => RepositoryDetailPage(
+                                name: _results[index]["name"],
+                                description: _results[index]["description"] ?? "",
+                                avatarUrl: _results[index]["owner"]["avatar_url"],
+                                language: _results[index]["language"] ?? "Not specified",
+                                stars: _results[index]["stargazers_count"] ?? 0,
+                                watchers: _results[index]["watchers_count"] ?? 0,
+                                forks: _results[index]["forks_count"] ?? 0,
+                                issues: _results[index]["open_issues_count"] ?? 0,
+                              ),
+                            ),
                           );
                         },
                       ),
