@@ -50,12 +50,25 @@ class _RepositorySearchPageState extends State<RepositorySearchPage> {
         _results = data["items"];
         _isLoading = false;
       });
+    } else if (_controller.text.isEmpty) {
+      await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: const Text("キーワードを入力して下さい"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text("OK"),
+            ),
+          ],
+        ),
+      );
     } else {
       await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text("Error"),
-          content: Text("Failed to fetch data: ${response.statusCode}"),
+          title: const Text("エラー"),
+          content: const Text("キーワードが不正です"),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
