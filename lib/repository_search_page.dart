@@ -74,7 +74,7 @@ class _RepositorySearchPageState extends State<RepositorySearchPage> {
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         title: const Text(
-            "GitHub Repository Search",
+            "Repository Search Page",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
