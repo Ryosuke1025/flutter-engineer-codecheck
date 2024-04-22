@@ -2,6 +2,8 @@ import "dart:convert";
 import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
 
+import "repository_detail_page.dart";
+
 void main() {
   runApp(const MyApp());
 }
@@ -17,18 +19,18 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const GitHubSearchPage(),
+      home: const RepositorySearchPage(),
     );
 }
 
-class GitHubSearchPage extends StatefulWidget {
-  const GitHubSearchPage({super.key});
+class RepositorySearchPage extends StatefulWidget {
+  const RepositorySearchPage({super.key});
 
   @override
-  State<GitHubSearchPage> createState() => _GitHubSearchPageState();
+  State<RepositorySearchPage> createState() => _RepositorySearchPageState();
 }
 
-class _GitHubSearchPageState extends State<GitHubSearchPage> {
+class _RepositorySearchPageState extends State<RepositorySearchPage> {
   final TextEditingController _controller = TextEditingController();
   List<dynamic> _results = [];
   bool _isLoading = false;
@@ -111,6 +113,16 @@ class _GitHubSearchPageState extends State<GitHubSearchPage> {
                         title: Text(_results[index]["name"]),
                         subtitle: Text(
                             _results[index]["description"] ?? "",),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RepositoryDetailPage(
+                              name: _results[index]["name"],
+                              description: _results[index]["description"] ?? "",
+                              avatarUrl: _results[index]["owner"]["avatar_url"],
+                            ),),
+                          );
+                        },
                       ),
                     ),
             ),
